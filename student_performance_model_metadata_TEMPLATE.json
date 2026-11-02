@@ -1,0 +1,7 @@
+{
+  "nota": "PLANTILLA. Sustituir este archivo por student_performance_model_metadata.json generado en el Paso 10 del cuaderno.",
+  "target": "GradeClass",
+  "excluded_columns": ["StudentID", "GPA"],
+  "features": ["Age", "Gender", "Ethnicity", "ParentalEducation", "StudyTimeWeekly", "Absences", "Tutoring", "ParentalSupport", "Extracurricular", "Sports", "Music", "Volunteering"],
+  "class_labels": {"0": "A", "1": "B", "2": "C", "3": "D", "4": "F"}
+}
