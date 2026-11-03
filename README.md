@@ -1,45 +1,75 @@
-# Predicción del rendimiento académico con Machine Learning
+# Predicción de rendimiento académico
 
-Aplicación interactiva en Streamlit para estimar `GradeClass` a partir de variables demográficas, hábitos de estudio, apoyo parental y actividades extracurriculares.
+Aplicación web desarrollada en Streamlit para estimar la clase académica de un estudiante a partir de variables observables relacionadas con su perfil sociodemográfico, hábitos de estudio y entorno familiar.
 
-## Decisiones metodológicas
+## Descripción general
 
-- `StudentID` se excluye por ser un identificador.
-- `GPA` se excluye para prevenir **Data Leakage**, ya que `GradeClass` se deriva del GPA.
-- División estratificada Train/Test 80/20.
-- Validación cruzada estratificada de 5 folds.
-- Comparación de Logistic Regression, Random Forest, SVM y KNN.
-- Métrica principal: F1-Macro.
+Este proyecto implementa un prototipo de clasificación supervisada para la predicción de `GradeClass`. La interfaz permite ingresar información como:
 
-## Archivos necesarios para desplegar
+- edad
+- género
+- etnia
+- nivel educativo de los padres
+- horas de estudio por semana
+- ausencias
+- tutoría
+- apoyo parental
+- actividad extracurricular
+
+La aplicación devuelve la clase estimada y la distribución probabilística de las categorías disponibles.
+
+## Metodología
+
+Se entrenó un modelo de clasificación sobre un conjunto de datos sintético, seleccionando el mejor desempeño mediante validación cruzada con criterio de evaluación basado en F1-Macro.
+
+### Variables excluidas
+
+- `StudentID`: identificador sin valor predictivo para el problema.
+- `GPA`: se excluye para evitar fuga de información, dado que `GradeClass` se deriva de esta variable.
+
+### Procedimiento de evaluación
+
+- partición estratificada Train/Test 80/20
+- validación cruzada estratificada con 5 folds
+- métrica principal: F1-Macro
+
+## Estructura del repositorio
 
 ```text
 app.py
 requirements.txt
 best_student_performance_model.joblib
 student_performance_model_metadata.json
+README.md
 ```
 
-Los dos últimos archivos se generan al ejecutar el Paso 10 del cuaderno de entrenamiento.
+## Requisitos
 
-## Ejecución local
+- Python 3.11+
+- pip
+- Streamlit
+- pandas
+- scikit-learn
+- joblib
+
+## Instalación local
 
 ```bash
 python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Despliegue
+## Despliegue en Streamlit Community Cloud
 
-1. Ejecutar completamente el cuaderno de entrenamiento y obtener el `.joblib` y el JSON de metadatos.
-2. Colocar esos dos archivos junto a `app.py` y `requirements.txt`.
-3. Subir los archivos al mismo repositorio de GitHub.
-4. En Streamlit Community Cloud elegir el repositorio, rama y `app.py` como archivo principal.
+1. Subir el repositorio a GitHub.
+2. Mantener todos los archivos en la carpeta raíz del proyecto.
+3. En Streamlit Community Cloud seleccionar el repositorio, la rama y `app.py` como archivo principal.
+4. Confirmar que `requirements.txt` se use para instalar dependencias automáticamente.
 
-## Dataset
+## Fuente del dataset
 
 Rabie El Kharoua, *Students Performance Dataset*, Kaggle, licencia CC BY 4.0.
 
-## Limitación
+## Limitaciones
 
-El dataset es sintético. Esta aplicación es una demostración académica y no está validada para tomar decisiones reales sobre estudiantes.
+El conjunto de datos es sintético y el prototipo tiene fines académicos y de demostración. No debe utilizarse como base para decisiones reales sobre estudiantes ni para evaluaciones institucionales.
